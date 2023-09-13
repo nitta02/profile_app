@@ -11,6 +11,10 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordContoller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
