@@ -68,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignUpPage(),
+                                builder: (context) => const SignUpPage(),
                               ));
                         },
                         child: CustomText(
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(5.0),
               ),
               hintText: 'username or email',
-              hintStyle: TextStyle(
+              hintStyle: const TextStyle(
                 fontWeight: FontWeight.w200,
                 letterSpacing: 1.8,
               )),
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(5.0),
               ),
               hintText: 'password',
-              hintStyle: TextStyle(
+              hintStyle: const TextStyle(
                 fontWeight: FontWeight.w200,
                 letterSpacing: 1.8,
               )),
