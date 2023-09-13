@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:profile_app/pages/signup_page.dart';
+import 'package:profile_app/pages/login_page.dart';
 import 'package:profile_app/widgets/custom_text.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,49 +41,63 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: 'Welcome Back!',
+                  text: 'Welcome!',
                   fontsize: 20,
                   fontWeight: FontWeight.w400,
                 ),
                 CustomText(
-                  text: 'Sign in to continue!',
+                  text: 'Sign up to continue!',
                   fontsize: 25,
                   fontWeight: FontWeight.bold,
                 )
               ],
             ),
             singInForm(),
+            10.heightBox,
+            // Center(
+            //   child: Column(
+            //     children: [
+            //       CustomText(
+            //         text: 'or',
+            //         fontsize: 12,
+            //         fontWeight: FontWeight.w300,
+            //       ),
+            //       10.heightBox,
+            //       CustomText(
+            //         text: 'Signup with',
+            //         fontsize: 20,
+            //         fontWeight: FontWeight.w400,
+            //       )
+            //     ],
+            //   ),
+            // ),
+            10.heightBox,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     CustomText(
-                      text: "Don't have an account?",
+                      text: "Already have an account?",
                       fontsize: 14,
                       fontWeight: FontWeight.w300,
                     ),
                     TextButton(
                         onPressed: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignUpPage(),
+                                builder: (context) => LoginPage(),
                               ));
                         },
                         child: CustomText(
-                          text: 'SignUp',
+                          text: 'Signin',
                           fontsize: 20,
                           fontWeight: FontWeight.bold,
                         ))
                   ],
                 ),
                 10.heightBox,
-                CustomText(
-                  text: 'Forget Password',
-                  fontsize: 14,
-                  fontWeight: FontWeight.w300,
-                )
               ],
             ),
           ],
@@ -101,7 +115,19 @@ class _LoginPageState extends State<LoginPage> {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5.0),
               ),
-              hintText: 'username or email',
+              hintText: 'name',
+              hintStyle: TextStyle(
+                fontWeight: FontWeight.w200,
+                letterSpacing: 1.8,
+              )),
+        ),
+        15.heightBox,
+        TextFormField(
+          decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              hintText: 'email',
               hintStyle: TextStyle(
                 fontWeight: FontWeight.w200,
                 letterSpacing: 1.8,
@@ -120,10 +146,22 @@ class _LoginPageState extends State<LoginPage> {
               )),
         ),
         10.heightBox,
+        TextFormField(
+          decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              hintText: 'confirm password',
+              hintStyle: TextStyle(
+                fontWeight: FontWeight.w200,
+                letterSpacing: 1.8,
+              )),
+        ),
+        15.heightBox,
         TextButton(
             onPressed: () {},
             child: CustomText(
-              text: 'Login',
+              text: 'Signup',
               fontsize: 24,
               fontWeight: FontWeight.bold,
             ))
