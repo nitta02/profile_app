@@ -40,6 +40,7 @@ dependencies:
   firebase_dart: ^1.0.11
   firebase_storage: ^11.2.6
   velocity_x: ^4.1.1
+  cloud_firestore: ^4.9.1
 
 dev_dependencies:
   flutter_test:
