@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:profile_app/pages/login_page.dart';
 import 'package:profile_app/widgets/custom_text.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -19,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final passwordContoller = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   bool showVisibility = true;
 
   String name = '';
@@ -265,7 +267,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  void _handleSignUp() async {
+  Future<void> _handleSignUp() async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -273,8 +275,22 @@ class _SignUpPageState extends State<SignUpPage> {
         password: passwordContoller.text,
       );
       print("Details: $userCredential");
+
+      addUserDetails(
+        nameController.text.trim(),
+        emailController.text.trim(),
+        passwordContoller.text.trim(),
+      );
     } catch (e) {
       print('Exception');
     }
+  }
+
+  Future addUserDetails(String namee, String eemail, String paassword) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'name': namee,
+      'email': eemail,
+      'password': paassword,
+    });
   }
 }
