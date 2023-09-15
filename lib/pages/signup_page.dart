@@ -1,8 +1,9 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:profile_app/pages/login_page.dart';
+import 'package:profile_app/screens/home_screen.dart';
 import 'package:profile_app/widgets/custom_text.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,14 +19,24 @@ class _SignUpPageState extends State<SignUpPage> {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordContoller = TextEditingController();
+  final confirmpasswordContoller = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool showVisibility = true;
 
-  String name = '';
-  String email = '';
-  String password = '';
+  // String name = '';
+  // String email = '';
+  // String password = '';
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    emailController.dispose();
+    passwordContoller.dispose();
+    confirmpasswordContoller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,11 +160,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 return null;
               }
             },
-            onChanged: (value) {
-              setState(() {
-                name = value;
-              });
-            },
+            // onChanged: (value) {
+            //   setState(() {
+            //     name = value;
+            //   });
+            // },
           ),
           15.heightBox,
           TextFormField(
@@ -180,11 +191,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 return null;
               }
             },
-            onChanged: (value) {
-              setState(() {
-                email = value;
-              });
-            },
+            // onChanged: (value) {
+            //   setState(() {
+            //     emailController.text = value;
+            //   });
+            // },
           ),
           15.heightBox,
           TextFormField(
@@ -209,11 +220,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 return null;
               }
             },
-            onChanged: (value) {
-              setState(() {
-                password = value;
-              });
-            },
+            // onChanged: (value) {
+            //   setState(() {
+            //     passwordContoller.text = value;
+            //   });
+            // },
             onTap: () {
               setState(() {
                 showVisibility = !showVisibility;
@@ -222,12 +233,13 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           10.heightBox,
           TextFormField(
+            controller: confirmpasswordContoller,
             obscureText: showVisibility,
-            onTap: () {
-              setState(() {
-                showVisibility = !showVisibility;
-              });
-            },
+            // onTap: () {
+            //   setState(() {
+            //     showVisibility = !showVisibility;
+            //   });
+            // },
             decoration: InputDecoration(
                 suffixIcon: showVisibility
                     ? const Icon(Icons.visibility)
@@ -253,8 +265,18 @@ class _SignUpPageState extends State<SignUpPage> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   _handleSignUp();
-                  emailController.clear();
-                  passwordContoller.clear();
+
+                  //User Details Save to Firebase Database/Cloud Firestor
+
+                  addUserDetails(
+                    nameController.text.trim(),
+                    emailController.text.toString(),
+                    passwordContoller.text.toString(),
+                  );
+                  // nameController.clear();
+                  // emailController.clear();
+                  // passwordContoller.clear();
+                  // confirmpasswordContoller.clear();
                 }
               },
               child: CustomText(
@@ -269,18 +291,18 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future<void> _handleSignUp() async {
     try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordContoller.text,
-      );
-      print("Details: $userCredential");
+      UserCredential userCredential = await _auth
+          .createUserWithEmailAndPassword(
+            email: emailController.text,
+            password: passwordContoller.text,
+          )
+          .then((value) async => await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomeScreen(),
+              )));
 
-      addUserDetails(
-        nameController.text.trim(),
-        emailController.text.trim(),
-        passwordContoller.text.trim(),
-      );
+      print("Details: $userCredential");
     } catch (e) {
       print('Exception');
     }

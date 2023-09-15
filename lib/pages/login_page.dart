@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profile_app/pages/signup_page.dart';
+import 'package:profile_app/screens/home_screen.dart';
 import 'package:profile_app/widgets/custom_text.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -121,7 +122,13 @@ class _LoginPageState extends State<LoginPage> {
         ),
         10.heightBox,
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ));
+            },
             child: CustomText(
               text: 'Login',
               fontsize: 24,
