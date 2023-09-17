@@ -20,15 +20,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Profile-O',
       theme: ThemeData(
         fontFamily: 'Mooli',
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Color.fromARGB(255, 33, 150, 243), // Material Blue
+        appBarTheme: AppBarTheme(
+          elevation: 0.0,
+          
+          backgroundColor: CustomColors.appBarColor, // Material Blue
         ),
         scaffoldBackgroundColor: CustomColors.scaffoldBackgroundColor1,
 
         // scaffoldBackgroundColor: const Color.fromRGBO(110, 225, 236, 0.98),
       ),
+      
       home: const LoginPage(),
     );
   }
