@@ -40,6 +40,7 @@ dependencies:
   firebase_dart: ^1.0.11
   firebase_storage: ^11.2.6
   velocity_x: ^4.1.1
+  cloud_firestore: ^4.9.1
 
 dev_dependencies:
   flutter_test:
@@ -79,10 +80,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Mooli
+      fonts:
+        - asset: assets/fonts/Mooli-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

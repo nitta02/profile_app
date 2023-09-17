@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:profile_app/pages/signup_page.dart';
+import 'package:profile_app/screens/home_screen.dart';
 import 'package:profile_app/widgets/custom_text.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -68,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SignUpPage(),
+                                builder: (context) => const SignUpPage(),
                               ));
                         },
                         child: CustomText(
@@ -102,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(5.0),
               ),
               hintText: 'username or email',
-              hintStyle: TextStyle(
+              hintStyle: const TextStyle(
                 fontWeight: FontWeight.w200,
                 letterSpacing: 1.8,
               )),
@@ -114,14 +115,20 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(5.0),
               ),
               hintText: 'password',
-              hintStyle: TextStyle(
+              hintStyle: const TextStyle(
                 fontWeight: FontWeight.w200,
                 letterSpacing: 1.8,
               )),
         ),
         10.heightBox,
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ));
+            },
             child: CustomText(
               text: 'Login',
               fontsize: 24,
