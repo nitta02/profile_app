@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
     await FirebaseFirestore.instance
         .collection('users')
         .get()
+        // ignore: avoid_function_literals_in_foreach_calls
         .then((value) => value.docs.forEach((element) {
               print(element.reference);
               users.add(element.reference.id);
