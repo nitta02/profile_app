@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:profile_app/screens/drawer_screen.dart';
 
@@ -27,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: const Text('Profile-O'),
       ),
-      drawer: DrawerScreen(),
+      drawer: const DrawerScreen(),
       body: Column(
         children: [
           Expanded(
@@ -35,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               future: getUserId(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else if (snapshot.hasError) {
@@ -47,8 +46,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.person),
-                        Text('name : ${name}'),
+                        const Icon(Icons.person),
+                        Text('name : $name'),
                       ],
                     ),
                   );
@@ -73,14 +72,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
         setState(() {
           name = userData['name'] ?? '';
+          // ignore: avoid_print
           print(name);
         });
       } else {
         // Handle the case where the user document doesn't exist
+        // ignore: avoid_print
         print('Error');
       }
     } catch (e) {
       // Handle exceptions here
+      // ignore: avoid_print
       print('Exception: $e');
     }
   }

@@ -15,7 +15,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     return Drawer(
       child: Column(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             child: CircleAvatar(),
           ),
           ListTile(
@@ -23,22 +23,22 @@ class _DrawerScreenState extends State<DrawerScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HomeScreen(),
+                    builder: (context) => const HomeScreen(),
                   ));
             },
-            leading: Icon(Icons.home),
-            title: Text('Home'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
           ),
           ListTile(
             onTap: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProfileScreen(),
+                    builder: (context) => const ProfileScreen(),
                   ));
             },
-            leading: Icon(Icons.person),
-            title: Text('Profile'),
+            leading: const Icon(Icons.person),
+            title: const Text('Profile'),
           ),
         ],
       ),
