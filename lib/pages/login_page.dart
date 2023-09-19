@@ -31,18 +31,6 @@ class _LoginPageState extends State<LoginPage> {
           MaterialPageRoute(
             builder: (context) => const HomeScreen(),
           ));
-    }).onError((error, stackTrace) {
-      return showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: SpinKitWave(
-              color: Colors.white,
-              size: 50.0,
-            ),
-          );
-        },
-      );
     });
   }
 

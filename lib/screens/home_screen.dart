@@ -16,11 +16,11 @@ class _HomeScreenState extends State<HomeScreen> {
   final auth = FirebaseAuth.instance.currentUser;
   List<String> users = [];
 
-  @override
-  void initState() {
-    getUserId();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   getUserId();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
