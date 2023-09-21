@@ -1,9 +1,7 @@
-// ignore_for_file: avoid_print
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:profile_app/screens/drawer_screen.dart';
+import 'package:profile_app/widgets/custom_text.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,17 +11,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final auth = FirebaseAuth.instance.currentUser;
-  List<String> users = [];
-
-  // @override
-  // void initState() {
-  //   getUserId();
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
+    double customHeight = MediaQuery.of(context).size.height;
+    double customWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -31,37 +23,88 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: const DrawerScreen(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(
-                child: FutureBuilder(
-                    future: getUserId(),
-                    builder: (context, snapshot) {
-                      return ListView.builder(
-                        itemCount: users.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(users[index]),
-                          );
-                        },
-                      );
-                    })),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 10,
+          left: 10,
+          right: 10,
+        ),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Image.asset(
+                    'assets/icons/man.png',
+                    height: 80,
+                    width: 80,
+                  ),
+                  20.widthBox,
+                  CustomText(
+                    text: 'Tanmoy Sarker',
+                    fontsize: 20,
+                    fontWeight: FontWeight.bold,
+                  )
+                ],
+              ),
+              30.heightBox,
+              CustomText(
+                text: 'Complete Profile',
+                fontsize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              40.heightBox,
+              Container(
+                decoration: ShapeDecoration(
+                  shape: Vx.roundedSm,
+                  color: Color.fromARGB(255, 106, 173, 227),
+                ),
+                height: customHeight * 0.8,
+                width: customWidth * 1.5,
+                padding: EdgeInsets.only(
+                  top: 5,
+                  left: 5,
+                  right: 5,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText(
+                      text: 'Overview',
+                      fontsize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    15.heightBox,
+                    CustomText(
+                      text:
+                          'My Self Nitta Ranjan Sarker. \nI currently studying Software Engineering at Daffodil Internation Univeristy.',
+                      fontsize: 15,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    15.heightBox,
+                    CustomText(
+                      text: 'Skills',
+                      fontsize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    15.heightBox,
+                    CustomText(
+                      text: '1.Dart \n 2.Flutter',
+                      fontsize: 15,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
-  }
-
-  Future<void> getUserId() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .get()
-        // ignore: avoid_function_literals_in_foreach_calls
-        .then((value) => value.docs.forEach((element) {
-              print(element.reference);
-              users.add(element.reference.id);
-            }));
   }
 }

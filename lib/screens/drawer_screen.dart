@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:profile_app/colors/colors.dart';
 import 'package:profile_app/pages/login_page.dart';
 import 'package:profile_app/screens/home_screen.dart';
 import 'package:profile_app/screens/profile_screen.dart';
@@ -17,8 +18,16 @@ class _DrawerScreenState extends State<DrawerScreen> {
     return Drawer(
       child: Column(
         children: [
-          const DrawerHeader(
-            child: CircleAvatar(),
+          DrawerHeader(
+            child: CircleAvatar(
+              maxRadius: 50,
+              backgroundColor: CustomColors.scaffoldBackgroundColor,
+              // foregroundColor: CustomColors.scaffoldBackgroundColor,
+              child: Image(
+                image: AssetImage('assets/icons/man.png'),
+                height: 130,
+              ),
+            ),
           ),
           ListTile(
             onTap: () {
