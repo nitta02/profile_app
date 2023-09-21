@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:profile_app/screens/drawer_screen.dart';
+import 'package:profile_app/widgets/custom_text.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -12,76 +10,61 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final auth = FirebaseAuth.instance.currentUser;
-  String name = '';
-
-  @override
-  void initState() {
-    super.initState();
-    getUserId();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile-O'),
+        title: const Text(
+          'Profile-O',
+        ),
       ),
-      drawer: DrawerScreen(),
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder(
-              future: getUserId(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Error : ${snapshot.error}'),
-                  );
-                } else {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+      drawer: const DrawerScreen(),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 10,
+          left: 10,
+          right: 10,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.asset(
+                  'assets/icons/man.png',
+                  height: 80,
+                  width: 80,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(Icons.person),
-                        Text('name : ${name}'),
+                        CustomText(
+                          text: 'Name',
+                          fontsize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        CustomText(
+                          text: 'Mail@gmail.com',
+                          fontsize: 12,
+                          fontWeight: FontWeight.w400,
+                        )
                       ],
                     ),
-                  );
-                }
-              },
-            ),
-          ),
-        ],
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.edit),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
-  }
-
-  Future<void> getUserId() async {
-    try {
-      final userDocsID = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(auth!.uid)
-          .get();
-
-      if (userDocsID.exists) {
-        final userData = userDocsID.data() as Map<String, dynamic>;
-
-        setState(() {
-          name = userData['name'] ?? '';
-          print(name);
-        });
-      } else {
-        // Handle the case where the user document doesn't exist
-        print('Error');
-      }
-    } catch (e) {
-      // Handle exceptions here
-      print('Exception: $e');
-    }
   }
 }

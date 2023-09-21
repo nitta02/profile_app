@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:profile_app/pages/signup_page.dart';
 import 'package:profile_app/screens/home_screen.dart';
 import 'package:profile_app/widgets/custom_text.dart';
@@ -12,6 +14,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final auth = FirebaseAuth.instance;
+
+  void signInMethod() {
+    auth
+        .signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    )
+        .then((value) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreen(),
+          ));
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,47 +123,68 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget singInForm() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextFormField(
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              hintText: 'username or email',
-              hintStyle: const TextStyle(
-                fontWeight: FontWeight.w200,
-                letterSpacing: 1.8,
-              )),
-        ),
-        15.heightBox,
-        TextFormField(
-          decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              hintText: 'password',
-              hintStyle: const TextStyle(
-                fontWeight: FontWeight.w200,
-                letterSpacing: 1.8,
-              )),
-        ),
-        10.heightBox,
-        TextButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomeScreen(),
-                  ));
+    return Form(
+      key: formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please Enter email';
+              } else {
+                return null;
+              }
             },
-            child: CustomText(
-              text: 'Login',
-              fontsize: 24,
-              fontWeight: FontWeight.bold,
-            ))
-      ],
+            controller: emailController,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                hintText: 'username or email',
+                hintStyle: const TextStyle(
+                  fontWeight: FontWeight.w200,
+                  letterSpacing: 1.8,
+                )),
+          ),
+          15.heightBox,
+          TextFormField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please Enter password';
+              } else {
+                return null;
+              }
+            },
+            controller: passwordController,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                hintText: 'password',
+                hintStyle: const TextStyle(
+                  fontWeight: FontWeight.w200,
+                  letterSpacing: 1.8,
+                )),
+          ),
+          10.heightBox,
+          TextButton(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  signInMethod();
+                } else {
+                  const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+              child: CustomText(
+                text: 'Login',
+                fontsize: 24,
+                fontWeight: FontWeight.bold,
+              ))
+        ],
+      ),
     );
   }
 }
