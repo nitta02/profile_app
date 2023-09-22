@@ -17,13 +17,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DrawerHeader(
             child: CircleAvatar(
               maxRadius: 50,
               backgroundColor: CustomColors.scaffoldBackgroundColor,
               // foregroundColor: CustomColors.scaffoldBackgroundColor,
-              child: Image(
+              child: const Image(
                 image: AssetImage('assets/icons/man.png'),
                 height: 130,
               ),
@@ -37,7 +39,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     builder: (context) => const HomeScreen(),
                   ));
             },
-            leading: const Icon(Icons.home),
+            leading: CircleAvatar(
+              backgroundColor: CustomColors.scaffoldBackgroundColor,
+              child: Image.asset(
+                'assets/icons/house.png',
+                height: 35,
+              ),
+            ),
             title: const Text('Home'),
           ),
           ListTile(
@@ -48,7 +56,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     builder: (context) => const ProfileScreen(),
                   ));
             },
-            leading: const Icon(Icons.person),
+            leading: CircleAvatar(
+              backgroundColor: CustomColors.scaffoldBackgroundColor,
+              child: Image.asset(
+                'assets/icons/man.png',
+                height: 35,
+              ),
+            ),
             title: const Text('Profile'),
           ),
           ListTile(
@@ -61,7 +75,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     ));
               });
             },
-            leading: const Icon(Icons.logout_outlined),
+            leading: CircleAvatar(
+              backgroundColor: CustomColors.scaffoldBackgroundColor,
+              child: Image.asset(
+                'assets/icons/check-out.png',
+                height: 35,
+              ),
+            ),
             title: const Text('Log-out'),
           ),
         ],

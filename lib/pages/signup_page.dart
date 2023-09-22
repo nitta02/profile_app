@@ -21,7 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final passwordContoller = TextEditingController();
   final confirmpasswordContoller = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   bool showVisibility = true;
 
@@ -264,15 +263,16 @@ class _SignUpPageState extends State<SignUpPage> {
           TextButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  _handleSignUp();
+                  // _handleSignUp();
+                  userSignUp();
 
                   //User Details Save to Firebase Database/Cloud Firestor
 
-                  addUserDetails(
-                    nameController.text.trim(),
-                    emailController.text.toString(),
-                    passwordContoller.text.toString(),
-                  );
+                  // addUserDetails(
+                  //   nameController.text.trim(),
+                  //   emailController.text.toString(),
+                  //   passwordContoller.text.toString(),
+                  // );
                   // nameController.clear();
                   // emailController.clear();
                   // passwordContoller.clear();
@@ -289,30 +289,59 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Future<void> _handleSignUp() async {
-    try {
-      UserCredential userCredential = await _auth
-          .createUserWithEmailAndPassword(
-            email: emailController.text,
-            password: passwordContoller.text,
-          )
-          .then((value) async => await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
-              )));
+  // Future<void> _handleSignUp() async {
+  //   try {
+  //     UserCredential userCredentiaal = await _auth
+  //         .createUserWithEmailAndPassword(
+  //           email: emailController.text,
+  //           password: passwordContoller.text,
+  //         )
+  //         .then((value) async => await Navigator.push(
+  //             context,
+  //             MaterialPageRoute(
+  //               builder: (context) => const HomeScreen(),
+  //             )));
 
-      print("Details: $userCredential");
+  //     print("Details: $userCredentiaal");
+  //   } catch (e) {
+  //     print('Exception');
+  //   }
+  // }
+
+  // Future addUserDetails(String namee, String eemail, String paassword) async {
+  //   await FirebaseFirestore.instance.collection('users').add({
+  //     'name': namee,
+  //     'email': eemail,
+  //     'password': paassword,
+  //   });
+  // }
+
+  Future<void> userSignUp() async {
+    if (passwordContoller.text != confirmpasswordContoller.text) {
+      Navigator.pop(context);
+    }
+
+    try {
+      UserCredential userCridential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text, password: passwordContoller.text);
+
+      FirebaseFirestore.instance
+          .collection('userss')
+          .doc(userCridential.user!.email)
+          .set({
+        'name': nameController.text,
+        'email': emailController.text,
+        'password': passwordContoller.text
+      }).then((value) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            ));
+      });
     } catch (e) {
       print('Exception');
     }
-  }
-
-  Future addUserDetails(String namee, String eemail, String paassword) async {
-    await FirebaseFirestore.instance.collection('users').add({
-      'name': namee,
-      'email': eemail,
-      'password': paassword,
-    });
   }
 }
