@@ -4,6 +4,7 @@ import 'package:profile_app/pages/login_page.dart';
 import 'package:profile_app/screens/home_screen.dart';
 import 'package:profile_app/screens/profile_screen.dart';
 import 'package:profile_app/services/firebase_services.dart';
+import 'package:profile_app/widgets/custom_list.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
@@ -21,9 +22,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DrawerHeader(
+            margin: const EdgeInsets.all(
+              10,
+            ),
             child: CircleAvatar(
               maxRadius: 50,
-              backgroundColor: CustomColors.scaffoldBackgroundColor,
+              backgroundColor: materialColor.shade400,
               // foregroundColor: CustomColors.scaffoldBackgroundColor,
               child: const Image(
                 image: AssetImage('assets/icons/man.png'),
@@ -40,7 +44,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ));
             },
             leading: CircleAvatar(
-              backgroundColor: CustomColors.scaffoldBackgroundColor,
+              backgroundColor: materialColor.shade400,
               child: Image.asset(
                 'assets/icons/house.png',
                 height: 35,
@@ -57,7 +61,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ));
             },
             leading: CircleAvatar(
-              backgroundColor: CustomColors.scaffoldBackgroundColor,
+              backgroundColor: materialColor.shade400,
               child: Image.asset(
                 'assets/icons/man.png',
                 height: 35,
@@ -76,7 +80,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               });
             },
             leading: CircleAvatar(
-              backgroundColor: CustomColors.scaffoldBackgroundColor,
+              backgroundColor: materialColor.shade400,
               child: Image.asset(
                 'assets/icons/check-out.png',
                 height: 35,

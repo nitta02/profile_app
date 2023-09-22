@@ -19,6 +19,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final curentUser = FirebaseAuth.instance.currentUser;
   final userData = FirebaseFirestore.instance.collection('userss');
 
+  final newNameController = TextEditingController();
+  final newEmailController = TextEditingController();
+  final newPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,19 +95,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         20.heightBox,
                         CustomContainer(
-                          onPressed: () => editOption('Name'),
+                          onPressed: () => editOption(
+                            (value) {
+                              newNameController.text = value;
+                            },
+                            newNameController,
+                            data['name'],
+                          ),
                           customText: 'Name',
                           customMailname: data['name'],
                         ),
                         20.heightBox,
                         CustomContainer(
-                          onPressed: () => editOption('E-mail'),
+                          onPressed: () => editOption(
+                            (value) {
+                              newEmailController.text = value;
+                            },
+                            newEmailController,
+                            data['email'],
+                          ),
                           customText: 'Mail',
                           customMailname: data['email'],
                         ),
                         20.heightBox,
                         CustomContainer(
-                          onPressed: () => editOption('Password'),
+                          onPressed: () => editOption(
+                            (value) {
+                              newPasswordController.text = value;
+                            },
+                            newPasswordController,
+                            data['password'],
+                          ),
                           customText: 'password',
                           customMailname: data['password'],
                         ),
@@ -124,24 +146,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Future<void> editOption(String textFeild) async {
-    String newName = '';
-    final newNameController = TextEditingController();
+  Future<void> editOption(
+    void Function(String) onChangeed,
+    TextEditingController controller,
+    String textFeild,
+  ) async {
+    // String newName = '';
+    // final newNameController = TextEditingController();
 
     await showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           backgroundColor: CustomColors.scaffoldBackgroundColor1,
-          title: Text('Update'),
+          title: Text(
+            'Update',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           content: TextFormField(
-            
+            controller: controller,
             decoration: InputDecoration(
               hintText: textFeild,
             ),
-            onChanged: (value) {
-              newNameController.text = value;
-            },
+            onChanged: onChangeed,
           ),
           actions: [
             TextButton(
@@ -151,16 +180,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Text('Cancel'),
             ),
             TextButton(
-              onPressed: () => Navigator.of(context).pop(newNameController),
+              onPressed: () => Navigator.of(context).pop(controller),
               child: Text('Save'),
             )
           ],
         );
       },
     );
-    if (newNameController.text.trim().isNotEmpty) {
+    if (controller!.text.trim().isNotEmpty) {
       await userData.doc(curentUser!.email).update({
-        textFeild: newNameController.text,
+        'name': newNameController.text,
+        'email': newEmailController.text,
+        'password': newPasswordController.text,
       });
     }
   }

@@ -8,8 +8,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-      );
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -22,16 +22,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Profile-O',
       theme: ThemeData(
-        fontFamily: 'Mooli',
-        appBarTheme: AppBarTheme(
-          elevation: 0.0,
+          fontFamily: 'Mooli',
+          appBarTheme: AppBarTheme(
+            elevation: 0.0,
 
-          backgroundColor: CustomColors.appBarColor, // Material Blue
-        ),
-        scaffoldBackgroundColor: CustomColors.scaffoldBackgroundColor1,
-
-        // scaffoldBackgroundColor: const Color.fromRGBO(110, 225, 236, 0.98),
-      ),
+            backgroundColor: materialColor.shade900, // Material Blue
+          ),
+          scaffoldBackgroundColor: materialColor.shade600,
+          drawerTheme: DrawerThemeData(
+            backgroundColor: materialColor.shade400,
+          )
+          // scaffoldBackgroundColor: const Color.fromRGBO(110, 225, 236, 0.98),
+          ),
       home: const SplashScreen(),
     );
   }
