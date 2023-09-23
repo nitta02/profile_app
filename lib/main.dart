@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 
             backgroundColor: materialColor.shade900, // Material Blue
           ),
-          scaffoldBackgroundColor: materialColor.shade600,
+          scaffoldBackgroundColor: materialColor.shade200,
           drawerTheme: DrawerThemeData(
             backgroundColor: materialColor.shade400,
           )

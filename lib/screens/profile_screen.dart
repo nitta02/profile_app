@@ -25,6 +25,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double customHeight = MediaQuery.of(context).size.height;
+    double customWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -56,8 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Image.asset(
                           'assets/icons/man.png',
-                          height: 80,
-                          width: 80,
+                          height: customHeight * 0.12,
+                          width: customWidth * 0.15,
                         ),
                         Row(
                           children: [
@@ -159,7 +162,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: CustomColors.scaffoldBackgroundColor1,
-          title: Text(
+          title: const Text(
             'Update',
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -177,17 +180,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(controller),
-              child: Text('Save'),
+              child: const Text('Save'),
             )
           ],
         );
       },
     );
-    if (controller!.text.trim().isNotEmpty) {
+    if (controller.text.trim().isNotEmpty) {
       await userData.doc(curentUser!.email).update({
         'name': newNameController.text,
         'email': newEmailController.text,

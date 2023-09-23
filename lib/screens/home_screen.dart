@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               10.heightBox,
                               CustomText(
-                                text: data!['email'],
+                                text: data['email'],
                                 fontsize: 14,
                                 fontWeight: FontWeight.w300,
                               ),
@@ -92,11 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         decoration: ShapeDecoration(
                           shape: Vx.roundedSm,
-                          color: Color.fromARGB(255, 106, 173, 227),
+                          color: const Color.fromARGB(255, 106, 173, 227),
                         ),
                         height: customHeight * 0.8,
                         width: customWidth * 1.5,
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 5,
                           left: 5,
                           right: 5,

@@ -53,6 +53,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
             title: const Text('Home'),
           ),
           ListTile(
+            titleAlignment: ListTileTitleAlignment.center,
+            hoverColor: Colors.white,
             onTap: () {
               Navigator.push(
                   context,
@@ -68,6 +70,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
               ),
             ),
             title: const Text('Profile'),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: CircleAvatar(
+              backgroundColor: materialColor.shade400,
+              child: Image.asset(
+                'assets/icons/written-paper.png',
+                height: 35,
+              ),
+            ),
+            title: const Text('Details'),
           ),
           ListTile(
             onTap: () {
