@@ -58,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 50,
                   width: 50,
                 ),
+                20.widthBox,
                 CustomText(
                   text: 'ProfileO',
                   fontsize: 22,

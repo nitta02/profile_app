@@ -25,7 +25,7 @@ class CustomListTile extends StatelessWidget {
             leading: CircleAvatar(
               backgroundColor: materialColor.shade400,
               child: Image(
-                image: AssetImage(image as String),
+                image: image.image,
               ),
             ),
             title: Text(texxt),
