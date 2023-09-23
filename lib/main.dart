@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Profile-O',
       theme: ThemeData(
-          fontFamily: 'Mooli',
+          fontFamily: 'Poppins',
           appBarTheme: AppBarTheme(
             elevation: 0.0,
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:profile_app/colors/colors.dart';
 import 'package:profile_app/pages/login_page.dart';
 import 'package:profile_app/screens/home_screen.dart';
+import 'package:profile_app/screens/profile_details.dart';
 import 'package:profile_app/screens/profile_screen.dart';
 import 'package:profile_app/services/firebase_services.dart';
-import 'package:profile_app/widgets/custom_list.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
@@ -72,7 +72,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
             title: const Text('Profile'),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfileDetails(),
+                  ));
+            },
             leading: CircleAvatar(
               backgroundColor: materialColor.shade400,
               child: Image.asset(

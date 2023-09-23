@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:profile_app/screens/drawer_screen.dart';
@@ -73,10 +74,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 fontWeight: FontWeight.bold,
                               ),
                               10.heightBox,
-                              CustomText(
-                                text: data['email'],
-                                fontsize: 14,
-                                fontWeight: FontWeight.w300,
+                              Row(
+                                children: [
+                                  const Icon(CupertinoIcons.mail),
+                                  5.widthBox,
+                                  CustomText(
+                                    text: data['email'],
+                                    fontsize: 14,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ],
                               ),
                             ],
                           )

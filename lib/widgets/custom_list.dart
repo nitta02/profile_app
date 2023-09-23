@@ -6,31 +6,35 @@ import 'package:profile_app/colors/colors.dart';
 class CustomListTile extends StatelessWidget {
   final Function() onTap;
   final String texxt;
+  final String subText;
   final Image image;
   const CustomListTile({
     Key? key,
     required this.onTap,
     required this.texxt,
+    required this.subText,
     required this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 10.0,
-      child: ListView(
-        children: [
-          ListTile(
-            onTap: onTap,
-            leading: CircleAvatar(
-              backgroundColor: materialColor.shade400,
-              child: Image(
-                image: image.image,
-              ),
-            ),
-            title: Text(texxt),
-          ),
-        ],
+    return ListTile(
+      onTap: onTap,
+      leading: CircleAvatar(
+        backgroundColor: materialColor.shade400,
+        child: Image(
+          image: image.image,
+        ),
+      ),
+      title: Text(
+        texxt,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      subtitle: Text(
+        subText,
       ),
     );
   }
