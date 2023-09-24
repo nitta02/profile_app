@@ -3,7 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:profile_app/colors/colors.dart';
 import 'package:profile_app/screens/drawer_screen.dart';
+import 'package:profile_app/screens/profile_details.dart';
+import 'package:profile_app/widgets/custom_details_sm.dart';
+import 'package:profile_app/widgets/custom_list.dart';
 import 'package:profile_app/widgets/custom_text.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -50,97 +54,177 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               } else {
                 final data = snapshot.data!.data();
-                return SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Image.asset(
+                        'assets/icons/man.png',
+                        height: 150,
+                        width: 150,
+                      ),
+                    ),
+                    20.widthBox,
+                    Center(
+                      child: Column(
                         children: [
-                          Image.asset(
-                            'assets/icons/man.png',
-                            height: 80,
-                            width: 80,
+                          CustomText(
+                            text: data!['name'],
+                            fontsize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                          20.widthBox,
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: data!['name'],
-                                fontsize: 18,
-                                fontWeight: FontWeight.bold,
+                          10.heightBox,
+                          CustomText(
+                            text: 'App Developer',
+                            fontsize: 17,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          10.heightBox,
+                          InkWell(
+                            onTap: () {},
+                            child: Container(
+                              height: customHeight * 0.08,
+                              width: customWidth * 0.55,
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    blurRadius: 1.0,
+                                    offset: Offset(5, 5),
+                                  )
+                                ],
+                                gradient: LinearGradient(colors: [
+                                  materialColor.shade400,
+                                  materialColor.shade100,
+                                ]),
+                                borderRadius: BorderRadius.circular(8.0),
+                                color: materialColor.shade300,
                               ),
-                              10.heightBox,
-                              Row(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const Icon(CupertinoIcons.mail),
-                                  5.widthBox,
+                                  10.widthBox,
                                   CustomText(
                                     text: data['email'],
-                                    fontsize: 14,
+                                    fontsize: 15,
                                     fontWeight: FontWeight.w300,
-                                  ),
+                                  )
                                 ],
                               ),
-                            ],
-                          )
+                            ),
+                          ),
                         ],
                       ),
-                      30.heightBox,
-                      CustomText(
-                        text: 'Complete Profile',
-                        fontsize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      40.heightBox,
-                      Container(
-                        decoration: ShapeDecoration(
-                          shape: Vx.roundedSm,
-                          color: const Color.fromARGB(255, 106, 173, 227),
-                        ),
-                        height: customHeight * 0.8,
-                        width: customWidth * 1.5,
-                        padding: const EdgeInsets.only(
-                          top: 5,
-                          left: 5,
-                          right: 5,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CustomText(
-                              text: 'Overview',
-                              fontsize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            15.heightBox,
-                            CustomText(
-                              text:
-                                  'My Self ${data['name']}. \nI currently studying Software Engineering at Daffodil Internation Univeristy.',
-                              fontsize: 15,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            15.heightBox,
-                            CustomText(
-                              text: 'Skills',
-                              fontsize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            15.heightBox,
-                            CustomText(
-                              text: '1.Dart \n 2.Flutter',
-                              fontsize: 15,
-                              fontWeight: FontWeight.w400,
-                            ),
+                    ),
+                    30.heightBox,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomSmallDetails(
+                            customHeight: customHeight * 0.1,
+                            customWidth: customWidth * 0.3,
+                            title: 'Education',
+                            subtitle: 'SWE'),
+                        CustomSmallDetails(
+                            customHeight: customHeight * 0.1,
+                            customWidth: customWidth * 0.3,
+                            title: 'Experience',
+                            subtitle: 'None'),
+                        CustomSmallDetails(
+                            customHeight: customHeight * 0.1,
+                            customWidth: customWidth * 0.3,
+                            title: 'Rate',
+                            subtitle: '4.5/5'),
+                      ],
+                    ),
+                    10.heightBox,
+                    Container(
+                      height: customHeight / 3.7,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            // materialColor.shade600,
+                            materialColor.shade100,
+                            CustomColors.scaffoldBackgroundColor1,
                           ],
                         ),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                    ],
-                  ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProfileDetails(),
+                                  ));
+                            },
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 5,
+                                    top: 5,
+                                  ),
+                                  child: CustomText(
+                                    text: 'Complete Profile',
+                                    fontsize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.arrow_circle_right_outlined,
+                                )
+                              ],
+                            ),
+                          ),
+                          10.heightBox,
+                          Container(
+                            height: customHeight / 5,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 1.0,
+                                  offset: Offset(5, 5),
+                                )
+                              ],
+                              gradient: LinearGradient(colors: [
+                                materialColor.shade400,
+                                materialColor.shade100,
+                              ]),
+                              borderRadius: BorderRadius.circular(8.0),
+                              color: materialColor.shade300,
+                            ),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 5,
+                                  ),
+                                  child: CustomText(
+                                    text: 'Github Profile',
+                                    fontsize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.arrow_circle_right_outlined,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    40.heightBox,
+                  ],
                 );
               }
             },
