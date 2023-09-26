@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   10.widthBox,
                                   CustomText(
                                     text: data['email'],
-                                    fontsize: 15,
+                                    fontsize: 12,
                                     fontWeight: FontWeight.w300,
                                   )
                                 ],
