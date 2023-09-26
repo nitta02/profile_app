@@ -64,8 +64,8 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                       InkWell(
                         onTap: () {},
                         child: Container(
-                          height: customHeight * 0.08,
-                          width: customWidth * 0.55,
+                          height: customHeight * 0.09,
+                          width: customWidth * 0.65,
                           decoration: BoxDecoration(
                             boxShadow: const [
                               BoxShadow(

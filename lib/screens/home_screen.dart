@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {},
                             child: Container(
                               height: customHeight * 0.08,
-                              width: customWidth * 0.55,
+                              width: customWidth * 0.65,
                               decoration: BoxDecoration(
                                 boxShadow: const [
                                   BoxShadow(
@@ -120,25 +120,30 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     30.heightBox,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomSmallDetails(
-                            customHeight: customHeight * 0.1,
-                            customWidth: customWidth * 0.3,
-                            title: 'Education',
-                            subtitle: 'SWE'),
-                        CustomSmallDetails(
-                            customHeight: customHeight * 0.1,
-                            customWidth: customWidth * 0.3,
-                            title: 'Experience',
-                            subtitle: 'None'),
-                        CustomSmallDetails(
-                            customHeight: customHeight * 0.1,
-                            customWidth: customWidth * 0.3,
-                            title: 'Rate',
-                            subtitle: '4.5/5'),
-                      ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomSmallDetails(
+                              customHeight: customHeight * 0.1,
+                              customWidth: customWidth * 0.35,
+                              title: 'Education',
+                              subtitle: 'SWE'),
+                          10.widthBox,
+                          CustomSmallDetails(
+                              customHeight: customHeight * 0.1,
+                              customWidth: customWidth * 0.3,
+                              title: 'Experience',
+                              subtitle: 'None'),
+                          10.widthBox,
+                          CustomSmallDetails(
+                              customHeight: customHeight * 0.1,
+                              customWidth: customWidth * 0.3,
+                              title: 'Rate',
+                              subtitle: '4.5/5'),
+                        ],
+                      ),
                     ),
                     10.heightBox,
                     Container(
