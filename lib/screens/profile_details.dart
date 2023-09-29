@@ -105,7 +105,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                             materialColor.shade100,
                           ]),
                         ),
-                        height: customHeight * 0.8,
+                        height: customHeight * 0.45,
                         width: customWidth * 1.5,
                         padding: const EdgeInsets.only(
                           top: 5,
@@ -139,6 +139,97 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                               text: '1.Dart \n 2.Flutter',
                               fontsize: 15,
                               fontWeight: FontWeight.w400,
+                            ),
+                          ],
+                        ),
+                      ),
+                      30.heightBox,
+                      Container(
+                        decoration: ShapeDecoration(
+                          shape: Vx.roundedSm,
+                          gradient: LinearGradient(colors: [
+                            materialColor.shade400,
+                            materialColor.shade100,
+                          ]),
+                        ),
+                        height: customHeight * 0.3,
+                        width: customWidth * 1.5,
+                        padding: const EdgeInsets.only(
+                          top: 5,
+                          left: 5,
+                          right: 5,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              text: 'Informations',
+                              fontsize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            15.heightBox,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Icon(CupertinoIcons.tv_circle),
+                                    5.widthBox,
+                                    CustomText(
+                                      text: 'website',
+                                      fontsize: 15,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            15.heightBox,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Icon(CupertinoIcons.mail),
+                                    5.widthBox,
+                                    CustomText(
+                                      text: 'e-mail',
+                                      fontsize: 15,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ],
+                                ),
+                                10.widthBox,
+                                CustomText(
+                                  text: data['email'],
+                                  fontsize: 15,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ],
+                            ),
+                            15.heightBox,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    const Icon(CupertinoIcons.phone),
+                                    5.widthBox,
+                                    CustomText(
+                                      text: 'phone',
+                                      fontsize: 15,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ],
+                                ),
+                                10.widthBox,
+                                CustomText(
+                                  text: 'number',
+                                  fontsize: 15,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ],
                             ),
                           ],
                         ),
