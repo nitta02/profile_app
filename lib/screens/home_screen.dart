@@ -105,7 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  const Icon(CupertinoIcons.mail),
+                                  const Icon(
+                                    CupertinoIcons.mail,
+                                    size: 16,
+                                  ),
                                   10.widthBox,
                                   CustomText(
                                     text: data['email'],
