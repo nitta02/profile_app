@@ -23,7 +23,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               maxRadius: 50,
               backgroundColor: CustomColors.scaffoldBackgroundColor,
               // foregroundColor: CustomColors.scaffoldBackgroundColor,
-              child: Image(
+              child: const Image(
                 image: AssetImage('assets/icons/man.png'),
                 height: 130,
               ),

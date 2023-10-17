@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.edit),
+                  icon: const Icon(Icons.edit),
                 ),
               ],
             )
